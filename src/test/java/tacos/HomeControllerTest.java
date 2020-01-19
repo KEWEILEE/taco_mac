@@ -24,4 +24,9 @@ public class HomeControllerTest {
                 .andExpect(view().name("home"))
                 .andExpect(content().string(containsString("Welcome")));
     }
+
+    @Test
+    public void GitTest(){
+
+    }
 }
