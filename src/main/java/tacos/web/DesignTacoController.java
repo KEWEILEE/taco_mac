@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
+import tacos.Order;
 import tacos.Taco;
 import tacos.data.IngredientRepository;
 import tacos.data.TacoRepository;
@@ -31,6 +32,12 @@ public class DesignTacoController {
         this.tacoRepository = tacoRepository;
     }
 
+    @ModelAttribute(name = "order") public Order order() {
+        return new Order();
+    }
+    @ModelAttribute(name = "taco") public Taco taco() {
+        return new Taco();
+    }
     @GetMapping
     public String showDesignForm(Model model) {
 //        List<Ingredient> ingredients = Arrays.asList(
@@ -56,7 +63,7 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processDesign(@Valid @ModelAttribute("design") Taco design, Errors errors, Model model) {
+    public String processDesign(@Valid @ModelAttribute("design") Taco design, Errors errors, Order order) {
     // Save the taco design...
     // We'll do this in chapter 3 log.info("Processing design: " + design);
         if (errors.hasErrors()){
